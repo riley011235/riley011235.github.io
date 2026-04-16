@@ -43,7 +43,9 @@ section{position:relative;z-index:2}
 #hero{background:transparent;min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 60px 60px;overflow:visible}
 .hero-footer{position:absolute;bottom:40px;left:60px;right:60px;display:flex;justify-content:flex-start;align-items:flex-end;opacity:0;animation:fadeIn 1s ease 1.2s forwards}
 .hero-coords a{font-size:11px;font-weight:300;letter-spacing:.04em;color:var(--mid);line-height:1.8;text-decoration:none;transition:color .3s}.hero-coords a:hover{color:var(--accent)}
-.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeHint 1s ease 1.8s forwards;transition:opacity 1.2s ease}.scroll-hint.hidden{opacity:0 !important;transition:opacity 1.5s ease}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity 2.5s ease}
+.scroll-hint.visible{opacity:0.4;transition:opacity 2s ease}
+.scroll-hint.faded{opacity:0;transition:opacity 3s ease}
 .scroll-hint span{font-size:10px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--black)}
 .scroll-hint .line{width:1px;height:36px;background:var(--black);animation:scrollLine 2s ease-in-out infinite}
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -53,8 +55,10 @@ section{position:relative;z-index:2}
 @keyframes shimmer{0%{left:-60%}100%{left:100%}}
 .progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;width:0%}
 .section-counter{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:12px}
-.section-dot{width:6px;height:6px;border-radius:50%;border:.5px solid var(--mid);background:transparent;transition:background .3s,transform .3s,border-color .3s}
+.section-dot{width:6px;height:6px;border-radius:50%;border:.5px solid var(--mid);background:transparent;transition:background .3s,transform .3s,border-color .3s;opacity:0}
+.section-dot.awake{animation:dotWake .8s ease forwards}
 .section-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.5)}
+@keyframes dotWake{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 
 /* Section labels in accent orange */
 .section-label-accent{font-size:10px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:40px}
@@ -129,13 +133,13 @@ section{display:flex;align-items:center}
   var LOCK_ORDER=[2,0,6,3,1,7,4];
   var UNLOCK_ORDER=[4,7,1,3,6,0,2];
   function expTimes(n,base,growth){var t=[];var acc=0;for(var i=0;i<n;i++){t.push(acc);acc+=base*Math.pow(growth,i);}return t;}
-  var lockDelays=expTimes(7,120,1.35);
-  var unlockDelays=expTimes(7,120,1.35);
-  var LOCK_TOTAL=lockDelays[6]+800;
-  var SCRAMBLE=2200;
+  var lockDelays=expTimes(7,50,1.35);
+  var unlockDelays=expTimes(7,50,1.35);
+  var LOCK_TOTAL=lockDelays[6]+300;
+  var SCRAMBLE=600;
   var HOLD=1000;
-  var UNLOCK_TOTAL=unlockDelays[6]+800;
-  var TOTAL=SCRAMBLE+LOCK_TOTAL+HOLD+UNLOCK_TOTAL+300;
+  var UNLOCK_TOTAL=unlockDelays[6]+300;
+  var TOTAL=SCRAMBLE+LOCK_TOTAL+HOLD+UNLOCK_TOTAL+200;
   var FLASH_DURATION=120; // ms the orange flash lasts before lock
   var start=performance.now();
   function rc(){return GLYPHS.charAt(Math.floor(Math.random()*GLYPHS.length));}
@@ -216,7 +220,21 @@ section{display:flex;align-items:center}
 })();
 
 // Hide scroll hint
-(function(){var h=document.getElementById('scrollHint');window.addEventListener('scroll',function(){if(window.scrollY>10){h.classList.add('hidden');}else{h.classList.remove('hidden');}});})();
+(function(){
+  var h=document.getElementById('scrollHint');
+  // Fade in after 2s
+  setTimeout(function(){h.classList.add('visible');},2000);
+  // Fade out/in based on scroll
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>10){
+      h.classList.remove('visible');
+      h.classList.add('faded');
+    }else{
+      h.classList.remove('faded');
+      h.classList.add('visible');
+    }
+  });
+})();
 
 // FULL-PAGE SHAPE CANVAS
 (function(){
@@ -366,6 +384,13 @@ window.addEventListener('scroll',function(){
   dots.forEach(function(d){d.classList.toggle('active',d.dataset.section===cur);});
 });
 dots.forEach(function(d){d.addEventListener('click',function(){var el=document.getElementById(d.dataset.section);if(el)el.scrollIntoView({behavior:'smooth'});});});
+// Wake up dots one at a time
+(function(){
+  var allDots=document.querySelectorAll('.section-dot');
+  allDots.forEach(function(d,i){
+    setTimeout(function(){d.classList.add('awake');},1200+i*400);
+  });
+})();
 // Continuous nav color detection (runs every frame, offset-based)
 (function(){
   var nv2=document.getElementById('mainNav');
