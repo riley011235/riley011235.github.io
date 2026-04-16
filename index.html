@@ -43,9 +43,9 @@ section{position:relative;z-index:2}
 #hero{background:transparent;min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 60px 60px;overflow:visible}
 .hero-footer{position:absolute;bottom:40px;left:60px;right:60px;display:flex;justify-content:flex-start;align-items:flex-end;opacity:0;animation:fadeIn 1s ease 1.2s forwards}
 .hero-coords a{font-size:11px;font-weight:300;letter-spacing:.04em;color:var(--mid);line-height:1.8;text-decoration:none;transition:color .3s}.hero-coords a:hover{color:var(--accent)}
-.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity 2.5s ease}
-.scroll-hint.visible{opacity:0.4;transition:opacity 2s ease}
-.scroll-hint.faded{opacity:0;transition:opacity 3s ease}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity .6s ease}
+.scroll-hint.visible{opacity:0.4;transition:opacity .5s ease}
+.scroll-hint.faded{opacity:0;transition:opacity .8s ease}
 .scroll-hint span{font-size:10px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--black)}
 .scroll-hint .line{width:1px;height:36px;background:var(--black);animation:scrollLine 2s ease-in-out infinite}
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -99,12 +99,48 @@ section{display:flex;align-items:center}
 #contact .big-cta a{color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:4px;transition:opacity .3s}#contact .big-cta a:hover{opacity:.7}
 .contact-footer{display:flex;justify-content:space-between;align-items:flex-end;width:100%;margin-top:auto;padding-top:40px}.contact-footer .copy{font-size:11px;font-weight:300;color:var(--mid)}
 #phiTrigger{position:fixed;bottom:14px;right:18px;z-index:9000;font-family:var(--serif);font-size:13px;color:rgba(180,160,120,.35);transition:color .3s;user-select:none}#phiTrigger:hover{color:rgba(200,175,100,.7)}
-#phiOverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:8000;pointer-events:none;overflow:hidden;display:none}
+#phiOverlay{position:fixed;top:0;left:0;right:0;bottom:16px;z-index:8000;pointer-events:none;overflow:hidden;display:none}
 #phiOverlay.active{display:flex;align-items:flex-end;justify-content:flex-end}
-#phiText{font-family:'Courier New',monospace;font-size:11px;line-height:1.5;color:rgba(145,128,75,.24);text-align:right;padding:20px;max-width:100%;word-break:break-all;white-space:pre-wrap}
+#phiText{font-family:'Courier New',monospace;font-size:11px;line-height:1.5;color:rgba(145,128,75,.24);text-align:right;padding:20px;max-width:100%;word-break:break-all;white-space:pre-wrap;letter-spacing:.25em}
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1)}.reveal.visible{opacity:1;transform:translateY(0)}
 .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.22s}.stagger-3{transition-delay:.34s}.stagger-4{transition-delay:.46s}
-@media(max-width:768px){#hero{padding:60px 28px 60px}.hero-footer{left:28px;right:28px;bottom:28px}#about,#work,#services,#contact{padding:60px 28px}nav{padding:0 28px}.about-grid{grid-template-columns:1fr}.about-item{border-right:none;border-bottom:.5px solid rgba(240,237,232,.15);padding:28px 0}.about-item:not(:first-child){padding-left:0}.services-grid{grid-template-columns:1fr}.work-item{grid-template-columns:40px 1fr}.work-type,.work-year{display:none}.nav-links{display:none}.cursor,.cursor-ring{display:none !important}.section-counter{display:none}}
+@media(max-width:768px){
+  #hero{padding:56px 24px 60px;min-height:100svh}
+  .hero-footer{left:24px;right:24px;bottom:24px}
+  .hero-coords a{font-size:10px}
+  .scroll-hint{bottom:24px}
+  nav{padding:0 24px;height:44px}
+  .nav-logo{font-size:10px}
+  .nav-links{gap:20px}
+  .nav-links a{font-size:9px;letter-spacing:.08em}
+  #about,#work,#services,#contact{padding:60px 24px}
+  #about .big-text{font-size:clamp(1.6rem,6vw,2.4rem);margin-bottom:40px}
+  .about-grid{grid-template-columns:1fr;gap:0}
+  .about-item{border-right:none;border-bottom:.5px solid rgba(240,237,232,.15);padding:20px 0}
+  .about-item:not(:first-child){padding-left:0}
+  .about-item .value{font-size:1.1rem}
+  #work .section-header{margin-bottom:32px}
+  .work-list{width:100%}
+  .work-item{grid-template-columns:36px 1fr;gap:16px;padding:18px 0}
+  .work-title{font-size:1.2rem}
+  .work-type,.work-year{display:none}
+  .services-grid{grid-template-columns:1fr;gap:1px}
+  .service-card{padding:36px 24px}
+  .service-name{font-size:1.4rem}
+  .service-desc{font-size:12px}
+  #contact .big-cta{font-size:clamp(2rem,8vw,3.5rem);margin-bottom:40px}
+  .contact-footer{flex-direction:column;gap:12px;align-items:flex-start}
+  .cursor,.cursor-ring{display:none !important}
+  .section-counter{display:none}
+  #phiTrigger{bottom:10px;right:12px;font-size:11px}
+  #shapeCanvas{display:none}
+}
+@media(max-width:400px){
+  nav .nav-links{gap:14px}
+  .nav-links a{font-size:8px}
+  #about .big-text{font-size:1.5rem}
+  .service-card{padding:28px 20px}
+}
 </style>
 </head>
 <body>
@@ -121,7 +157,7 @@ section{display:flex;align-items:center}
 <section id="work"><canvas class="work-bg" id="workBg"></canvas><div class="section-header"><span class="section-label-accent reveal">Projects</span></div><div class="work-list"><div class="work-item reveal stagger-1"><span class="work-num">01</span><a href="https://lastbart.pythonanywhere.com/" target="_blank" rel="noopener"><span class="work-title">Last BART</span></a><span class="work-type">Transit Tracking Tool</span><span class="work-year">2026</span></div><div class="work-item reveal stagger-2"><span class="work-num">02</span><span class="work-title">E-Commerce Store</span><span class="work-type">Amazon / Etsy / eBay / Shopify</span><span class="work-year">2012&ndash;2026</span></div></div></section>
 <div class="divider-line"></div>
 <section id="services"><div class="section-label-accent reveal">Pursuits & interests</div><div class="services-grid"><div class="service-card reveal stagger-1"><canvas id="bgCycling"></canvas><div class="service-num">01</div><h3 class="service-name">Gravel<br>Cycling</h3><p class="service-desc">Long days on dirt roads with good people. There's something about the rhythm of a gravel ride that resets everything.</p></div><div class="service-card reveal stagger-2"><canvas id="bgClimbing"></canvas><div class="service-num">02</div><h3 class="service-name">Ice<br>Climbing</h3><p class="service-desc">Vertical problem-solving in the cold. It demands full presence and there's no room to think about anything else on the wall.</p></div><div class="service-card reveal stagger-3"><canvas id="bgCivic"></canvas><div class="service-num">03</div><h3 class="service-name">Community<br>& Civic</h3><p class="service-desc">Showing up for the neighborhood through infrastructure advocacy, local organizing, and the quiet work that makes a place feel like home.</p></div><div class="service-card reveal stagger-4"><canvas id="bgDogs"></canvas><div class="service-num">04</div><h3 class="service-name">Dogs</h3><p class="service-desc">Life with a French Bulldog and a Pug. They don't care about product roadmaps and that's exactly the point.</p></div></div></section>
-<section id="contact"><div class="contact-glow"></div><p class="big-cta reveal">Product ops, side projects,<br>or a gravel ride.<br><a href="mailto:riley@rileyi.com">Let's connect.</a></p><div class="contact-footer reveal"><span class="copy">&copy; 2026 Riley Yi, San Francisco, CA</span></div></section>
+<section id="contact"><div class="contact-glow"></div><p class="big-cta reveal">Product ops, side projects,<br>or a gravel ride.<br><a href="https://www.linkedin.com/in/riley-yi" target="_blank" rel="noopener">Let's connect.</a></p><div class="contact-footer reveal"><span class="copy">&copy; 2026 Riley Yi, San Francisco, CA</span></div></section>
 <div id="phiTrigger">&phi;</div><div id="phiOverlay"><div id="phiText"></div></div>
 
 <script>
@@ -202,7 +238,7 @@ section{display:flex;align-items:center}
   var idx=0,digitCount=0;
   trigger.addEventListener('click',function(){
     if(active){clearInterval(iv);active=false;overlay.classList.remove('active');textEl.textContent='';idx=0;digitCount=0;return;}
-    active=true;overlay.classList.add('active');idx=0;digitCount=0;textEl.textContent='1.';
+    active=true;overlay.classList.add('active');idx=0;digitCount=0;textEl.textContent='\u03C6 = 1.';
     iv=setInterval(function(){
       // Pull from BASE, loop when exhausted
       var chunk='';
