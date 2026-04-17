@@ -196,7 +196,7 @@ var hlA=time*0.4;ctx.save();ctx.globalAlpha=0.07+Math.sin(time*3)*0.04;ctx.strok
 var hlB=time*0.25+2;ctx.save();ctx.globalAlpha=0.04+Math.sin(time*2.2)*0.02;ctx.strokeStyle=_w;ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(lcx+Math.cos(hlB)*lw*0.2-20,lcy+Math.sin(hlB)*lh*0.15+10);ctx.lineTo(lcx+Math.cos(hlB)*lw*0.2+20,lcy+Math.sin(hlB)*lh*0.15-10);ctx.stroke();ctx.restore();
 var lHov=(ht===L);ctx.save();ctx.strokeStyle=lHov?_o:_b;ctx.lineWidth=lHov?1.5:1;ctx.globalAlpha=lHov?0.7:0.4;ctx.beginPath();ctx.moveTo(lPts[0][0],lPts[0][1]);for(var j=1;j<lPts.length;j++)ctx.lineTo(lPts[j][0],lPts[j][1]);ctx.closePath();ctx.stroke();ctx.restore();
 ctx.save();ctx.globalAlpha=0.06;ctx.strokeStyle=_b;ctx.lineWidth=0.5;lPts.forEach(function(p){ctx.beginPath();ctx.moveTo(lcx,lcy);ctx.lineTo(p[0],p[1]);ctx.stroke();});ctx.restore();
-ctx.save();ctx.globalAlpha=0.7;ctx.fillStyle=_b;ctx.font='300 10px Karla,sans-serif';ctx.textAlign='center';ctx.fillText('PRODUCT',lcx,lcy-6);ctx.fillText('OPERATIONS',lcx,lcy+8);ctx.restore();
+ctx.save();ctx.globalAlpha=0.7;ctx.fillStyle=_b;ctx.font='300 11px Karla,sans-serif';ctx.textAlign='center';ctx.fillText('PRODUCT',lcx,lcy-6);ctx.fillText('OPERATIONS',lcx,lcy+8);ctx.restore();
 // Orbiting moons for left shape
 if(!L._moons){L._moons={active:false,fading:false,startTime:0,fadeTime:0,words:['SCALING','STRATEGY','OPTIMIZATION']};}
 var lmAlpha=0;
@@ -230,7 +230,7 @@ if(i===0)hc(nx,ny,nr,0.3,12,_o,0.04,1.6);
 ctx.save();ctx.globalAlpha=0.05+Math.sin(time*2.5+i)*0.025;ctx.strokeStyle=_w;ctx.lineWidth=0.8;var nhl=time*0.5+i*2;ctx.beginPath();ctx.moveTo(nx+Math.cos(nhl)*nr*0.5,ny-nr*0.3);ctx.lineTo(nx+Math.cos(nhl+0.5)*nr*0.4,ny+nr*0.2);ctx.stroke();ctx.restore();
 var nHov=(ht===n);ctx.save();ctx.strokeStyle=nHov?_o:_b;ctx.lineWidth=nHov?1.5:1;ctx.globalAlpha=nHov?0.7:0.4;ctx.beginPath();ctx.arc(nx,ny,nr,0,Math.PI*2);ctx.stroke();ctx.restore();
 ctx.save();ctx.strokeStyle=_b;ctx.lineWidth=0.5;ctx.globalAlpha=0.1;ctx.beginPath();ctx.arc(nx,ny,nr*0.6,0,Math.PI*2);ctx.stroke();ctx.restore();
-ctx.save();ctx.globalAlpha=0.65;ctx.fillStyle=_b;ctx.font='300 9px Karla,sans-serif';ctx.textAlign='center';ctx.fillText(n.label,nx,ny+3);ctx.restore();
+ctx.save();ctx.globalAlpha=0.65;ctx.fillStyle=_b;ctx.font='300 11px Karla,sans-serif';ctx.textAlign='center';ctx.fillText(n.label,nx,ny+3);ctx.restore();
 // Orbiting moons for nodes
 var moonWords=[['DATA','PRIVACY','SAFETY'],['LOGISTICS','PUBLIC HEALTH','COMPLIANCE'],['OUTDOORS','DOGS','COMMUNITY']];
 if(!n._moons){n._moons={active:false,fading:false,startTime:0,fadeTime:0,words:moonWords[i]||[]};}
