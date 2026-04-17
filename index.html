@@ -169,10 +169,10 @@ var ba=Math.max(W,H)*0.07*0.2;function bx(s){return Math.sin(time*1.17+s.bp)*ba*
 if(bgReady){ctx.drawImage(bgCanvas,0,sy,W*dpr,H*dpr,0,sy,W,H);}
 var L=shapes.left,lcx=L.x+bx(L),lcy=L.y+by(L),bSc=1+Math.sin(time*1.1+L.bp)*0.018,lw=L.w*bSc,lh=L.h*bSc;
 var lPts=[];lv.forEach(function(v){
-var aOff=Math.sin(time*v.speed*0.9+v.phase)*v.drift;
+var aOff=Math.sin(time*v.speed*1.08+v.phase)*v.drift;
 var a=v.a+aOff;
-var rx=lw*(v.rx+Math.sin(time*v.speed*0.63+v.phase*2)*v.ampX);
-var ry=lh*(v.ry+Math.cos(time*v.speed*0.81+v.phase*1.5)*v.ampY);
+var rx=lw*(v.rx+Math.sin(time*v.speed*0.756+v.phase*2)*v.ampX);
+var ry=lh*(v.ry+Math.cos(time*v.speed*0.972+v.phase*1.5)*v.ampY);
 lPts.push([lcx+Math.cos(a)*rx,lcy+Math.sin(a)*ry]);
 });
 if(!L._wedgeShades){
